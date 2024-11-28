@@ -4,7 +4,6 @@ setup_env() {
     sudo apt update
     sudo apt install python3-dev python3-setuptools python3-pip gcc make
 
-    source SHH/bin/activate
 
     pip install testresources
     pip install lgpio --only-binary :all:
