@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Hard Hat</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    function renderText(data) {
+      if (!data.error){
+        document.getElementById("co-value").textContent = data.co.value;
+        document.getElementById("co-status").textContent = data.co.status;
+
+        document.getElementById("h2s-value").textContent = data.h2s.value;
+        document.getElementById("h2s-status").textContent = data.h2s.status;
+
+        document.getElementById("co2-value").textContent = data.mhz.value.co2;
+        document.getElementById("co2-status").textContent = data.mhz.status;
+
+        document.getElementById("temp").textContent = data.mhz.value.temperature;
+
+        if (data.accel.status) {
+          document.getElementById("fall-status").textContent = data.accel.status;
+          document.getElementById('warning-container').style.display = 'flex';
+        } else {
+          document.getElementById('warning-container').style.display = 'none';
+        }
+      } else {
+        document.getElementById("warning-title").textContent = "Warming up sensor";
+        document.getElementById('warning-container').style.display = 'flex';
+      }
+    }
+
+    async function fetchData() {
+      try {
+        const response = await fetch('co2_data.json');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        renderText(data);
+      } catch (error) {
+        console.error('Error fetching the JSON file:', error);
+      }
+    }
+
+    fetchData(); 
+    setInterval(fetchData, 30000);
+  </script>
+</head>
+
+<body>
+  <main>
+    <h1>Smart Hard Hat</h1>
+
+    <div class="container">
+      <div class="card">
+        <h4 class="card-title">Carbon Monoxide</h4>
+        <div class="data-container">
+          <p class="data" id="co-value"></p>
+          <span class="units-text">ppm</span>
+        </div>
+        <div class="status-container">
+          <p class="status-label">Status</p>
+          <p class="status" id="co-status"></p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4 class="card-title">Carbon Dioxide</h4>
+        <div class="data-container">
+          <p class="data" id="co2-value"></p>
+          <span class="units-text">ppm</span>
+        </div>
+        <div class="status-container">
+          <p class="status-label">Status</p>
+          <p class="status" id="co2-status"></p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4 class="card-title">Hydrogen Sulfide</h4>
+        <div class="data-container">
+          <p class="data" id="h2s-value"></p>
+          <span class="units-text">ppm</span>
+        </div>
+        <div class="status-container">
+          <p class="status-label">Status</p>
+          <p class="status" id="h2s-status"></p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4 class="card-title">Temperature</h4>
+        <div class="data-container">
+          <p class="data" id="temp"></p>
+          <span class="units-text">Celsius</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="warning-container">
+      <div class="fall-warning">
+        <h4 class="card-title" id="warning-title">Fall / Impact</h4>
+        <div class="status-container">
+          <p class="status-label">Status</p>
+          <p class="status" id="fall-status"></p>
+        </div>
+      </div>
+    </div>
+    
+  </main>
+</body>
+
+</html>
