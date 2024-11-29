@@ -177,7 +177,7 @@ try:
                 alarm_urgency = "high"
         
         try:
-            out_file = open('/var/www/html/co2sensor/co2_data.json', "w")
+            out_file = open('/var/www/html/co2_data.json', "w")
             json.dump(web_data, out_file)
                 
         except Exception as e:
@@ -185,7 +185,7 @@ try:
                 'error': f"There was an error: {e}"
             }
             
-            out_file = open('/var/www/html/co2sensor/co2_data.json', "w")
+            out_file = open('/var/www/html/co2_data.json', "w")
             json.dump(web_data, out_file)
                 
         mem_usage()
