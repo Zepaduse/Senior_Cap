@@ -29,8 +29,15 @@ cs = DigitalInOut(board.D5)  # Adjust this pin as needed
 i2c = I2C(board.SCL, board.SDA)
 
 # Initialize MMA8451 accelerometer
-accelerometer = adafruit_mma8451.MMA8451(i2c)
-accelerometer.range = adafruit_mma8451.RANGE_8G
+accelerometer = None
+while not accelerometer:
+     try:
+         accelerometer = adafruit_mma8451.MMA8451(i2c) 
+         accelerometer.range = adafruit_mma8451.RANGE_8G
+         print(accelerometer)
+     except OSError as e:
+         print(f"i2c error {e} \nretrying....")
+         time.sleep(1)
 
 # Create the mcp object
 mcp = MCP.MCP3008(spi, cs)
