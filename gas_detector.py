@@ -177,7 +177,7 @@ try:
         
         
         # Check for significant motion
-        if magnitude >= 39.22:
+        if magnitude >= 14.6:
             print("Warning: Possible injury")
             web_data["accel"]["status"] = "Warning: Possible Injury"
             if not alarm_urgency:
