@@ -1,0 +1,142 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  margin: 1rem 0 5rem auto;
+  text-align: center;
+  font-size: xx-large;
+
+}
+
+.log-container {
+  padding: 1rem;
+
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: solid 1px black;
+  border-radius: 16px;
+  background-color: white;
+
+  text-decoration: none;
+  color: black;
+}
+
+.log-container:hover  {
+  scale: 1.1;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: space-evenly;
+}
+
+.card {
+  background: rgba(102, 38, 128, 0.29);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(102, 38, 128, 0.3);
+
+  width: 15rem;
+  height: 18rem;
+  padding: 1rem;
+}
+
+.card:hover {
+  background: rgba(102, 38, 128, 0.60);
+}
+
+.card:hover .data {
+  transform: scale(1.2)
+}
+
+.card-title {
+  margin: 0;
+  font-size: 23px;
+}
+
+.data-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+  padding-left: 0.5rem;
+}
+
+.data {
+  font-size: 24px;
+  color: cyan;
+
+  transition: 0.1s ease;
+}
+
+.status-container {
+  margin-top: 4rem;
+}
+
+.status-label {
+  font-size: 14px;
+  margin: 0;
+  color: gray;
+}
+
+.status {
+  margin: 0;
+}
+
+#warning-container {
+  display: none;
+  justify-content: center;
+}
+
+.fall-warning {
+  text-align: center;
+  padding: 0.5rem;
+  margin-top: 3vh;
+  width: 40rem;
+
+  background: rgba(128, 5, 7, 0.58);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(128, 5, 7, 0.3);
+
+  animation: warning-flash 1s infinite;
+}
+
+#fall-status {
+  font-size: 33px;
+}
+
+@keyframes warning-flash {
+  0% {
+    background: rgba(128, 5, 7, 0.58);
+  }
+
+  50% {
+    background: rgba(128, 5, 7, 1);
+  }
+
+
+  100% {
+    background: rgba(128, 5, 7, 0.58);
+  }
+}

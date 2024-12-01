@@ -10,6 +10,7 @@ from pygame import mixer
 import adafruit_mma8451
 import psutil
 import json
+from datetime import datetime
 
 #Webserver: sudo service apache2 restart
 
@@ -185,6 +186,8 @@ try:
         
         try:
             out_file = open('/var/www/html/co2_data.json', "w")
+            log_file = open('/var/www/html/log.txt', "a")
+            log_file.write(f"{datetime.now()} - CO: {web_data['co']} H2S: {web_data['h2s']} CO2: {web_data['mhz']['co2']} Accel: {web_data['accel']} Temp: {web_data['mhz']['temperature']}")
             json.dump(web_data, out_file)
                 
         except Exception as e:
@@ -193,6 +196,8 @@ try:
             }
             
             out_file = open('/var/www/html/co2_data.json', "w")
+            log_file = open('/var/www/html/log.txt', "a")
+            log_file.write(f"{datetime.now()} - Error: {e}")
             json.dump(web_data, out_file)
                 
         mem_usage()
