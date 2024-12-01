@@ -44,7 +44,7 @@ while not accelerometer:
 mcp = MCP.MCP3008(spi, cs)
 
 # Create analog input channels on pin 0 (MQ-9) and pin 1 (MQ-136)
-chan0 = AnalogIn(mcp, MCP.P0)  # MQ-9 for CO
+chan0 = AnalogIn(mcp, MCP.P2)  # MQ-9 for CO
 chan1 = AnalogIn(mcp, MCP.P1)  # MQ-136 for H2S
 
 def mem_usage():
@@ -53,6 +53,7 @@ def mem_usage():
     print(f"Memory used: {mem_info.rss / 1024 / 1024} Megabytes")    
 
 def convert_to_ppm_co(voltage):
+    print(voltage)
     # Adjust these values based on your MQ-9 sensor's specifications
     zero_voltage = 0.4  # voltage at 0 ppm (clean air)
     span_voltage = 2.0  # voltage at maximum ppm
@@ -110,7 +111,7 @@ mem_usage()
 
 # Warm-up period
 print("Warming up sensors: 1 minute. Please wait. Thank you!")
-time.sleep(60)  # Sensors' warm-up time
+time.sleep(15)  # Sensors' warm-up time
 
 try:
     while True:
