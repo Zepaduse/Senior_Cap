@@ -184,17 +184,19 @@ try:
             if not alarm_urgency:
                 alarm_urgency = "high"
         
+        
         try:
+            
             out_file = open('/var/www/html/co2_data.json', "w")
             log_file = open('/var/www/html/log.txt', "a")
-            log_file.write(f"{datetime.now()} - CO: {web_data['co']} H2S: {web_data['h2s']} CO2: {web_data['mhz']['co2']} Accel: {web_data['accel']} Temp: {web_data['mhz']['temperature']}")
+            log_file.write(f"{datetime.now()} - CO: {web_data['co']} H2S: {web_data['h2s']} CO2: {web_data['mhz']['value']['co2']} Accel: {web_data['accel']} Temp: {web_data['mhz']['value']['temperature']}\n")
             json.dump(web_data, out_file)
                 
         except Exception as e:
             web_data = {
                 'error': f"There was an error: {e}"
             }
-            
+
             out_file = open('/var/www/html/co2_data.json', "w")
             log_file = open('/var/www/html/log.txt', "a")
             log_file.write(f"{datetime.now()} - Error: {e}")
